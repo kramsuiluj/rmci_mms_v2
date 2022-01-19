@@ -8,7 +8,7 @@
 
             <form action="{{ route('admin.rooms.store') }}" method="POST" id="create-room">
                 @csrf
-                <div class="w-4/5 mx-auto sm:flex space-x-5">
+                <div class="w-4/5 mx-auto sm:flex sm:space-x-5">
 
                 <input type="hidden" name="strand_id" value="{{ $currentStrand->id ?? null }}" form="create-room">
                 <input type="hidden" name="grade_id" value="{{ $currentGrade->id ?? null }}" form="create-room">

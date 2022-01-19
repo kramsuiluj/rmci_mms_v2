@@ -16,11 +16,14 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete();
-            $table->foreignId('schedule_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('schedule_id')->constrained('schedules', 'id')->cascadeOnDelete();
             $table->string('module')->nullable();
+            $table->string('filename')->nullable();
             $table->boolean('status')->nullable();
             $table->boolean('is_displayed')->nullable();
             $table->timestamps();
+
+            $table->unique(['user_id', 'schedule_id', 'filename']);
         });
     }
 

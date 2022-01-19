@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
+use App\Http\Controllers\Administrator\{
     AdminPanelController,
     AdminTeacherController,
     AdminStrandController,
@@ -9,26 +9,27 @@ use App\Http\Controllers\{
     AdminSectionController,
     AdminRoomController,
     AdminSubjectController,
-    AdminScheduleController
+    AdminScheduleController,
+    TeacherPasswordController,
+    AdminStudentController
 };
 
-
-Route::prefix('admin')->as('admin.')->group(function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', [AdminPanelController::class, 'index'])->name('home');
 
     Route::resource('teachers', AdminTeacherController::class)->except('show');
 
-    Route::prefix('teachers')->as('teachers.')->group(function () {
-        Route::get('/{teacher}/change-password', [AdminTeacherController::class, 'editPassword'])
+    Route::group(['prefix' => 'teachers', 'as' => 'teachers.'], function () {
+        Route::get('/{teacher}/change-password', [TeacherPasswordController::class, 'edit'])
             ->name('edit-password');
-        Route::patch('/{teacher}/change', [AdminTeacherController::class, 'updatePassword'])
+        Route::patch('/{teacher}/change', [TeacherPasswordController::class, 'update'])
             ->name('update-password');
     });
 
     Route::resource('strands', AdminStrandController::class);
 
-    Route::prefix('strands')->group(function () {
-        Route::as('grades.')->group(function () {
+    Route::group(['prefix' => 'strands'], function () {
+        Route::group(['as' => 'grades.'], function () {
             Route::get('/{strand}/add-grade', [AdminGradeController::class, 'create'])
                 ->name('create');
             Route::post('/{strand}/add', [AdminGradeController::class, 'store'])
@@ -62,7 +63,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
     Route::resource('subjects', AdminSubjectController::class)->except('show');
 
-    Route::prefix('rooms')->as('schedules.')->group(function () {
+    Route::group(['prefix' => 'rooms', 'as' => 'schedules.'], function () {
         Route::get('/{room}/schedules', [AdminScheduleController::class, 'index'])
             ->name('index');
         Route::get('/{room}/schedules/create', [AdminScheduleController::class, 'create'])
@@ -75,6 +76,10 @@ Route::prefix('admin')->as('admin.')->group(function () {
             ->name('update');
         Route::delete('/{room}/schedules/{schedule}', [AdminScheduleController::class, 'destroy'])
             ->name('destroy');
+    });
+
+    Route::group(['prefix' => 'students', 'as' => 'students.'], function () {
+        Route::get('/', [AdminStudentController::class, 'index'])->name('index');
     });
 });
 

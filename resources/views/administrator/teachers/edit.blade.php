@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>UPDATE TEACHER ACCOUNT</x-content-header>
 
-        <div class="w-4/5 mx-auto sm:flex space-x-5">
+        <div class="w-4/5 mx-auto sm:flex sm:space-x-5">
             <form action="{{ route('admin.teachers.update', $teacher->id) }}" method="POST" id="create-teacher">
                 @csrf
                 @method('PATCH')
@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        <section class="sm:w-72 sm:ml-36 w-64 ml-16">
+        <section class="sm:w-72 sm:ml-36 w-64 ml-16 mt-5 sm:mt-0">
             <button type="submit" form="create-teacher" class="bg-blue-900 w-full py-2 rounded-full text-white font-bold hover:bg-blue-600">UPDATE ACCOUNT</button>
         </section>
     </x-containers.main>

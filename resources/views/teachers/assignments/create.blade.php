@@ -5,8 +5,8 @@
     <x-containers.main>
         <x-content-header>CREATE ASSIGNMENT</x-content-header>
 
-        <div class="w-4/5 mx-auto mb-10">
-            <div class="w-4/5 mx-auto">
+        <div class="sm:w-4/5 mx-auto mb-10">
+            <div class="sm:w-4/5 mx-auto">
                 <form action="{{ route('teacher.assignments.store', $schedule->id) }}" method="POST" id="createAssignment">
                     @csrf
 

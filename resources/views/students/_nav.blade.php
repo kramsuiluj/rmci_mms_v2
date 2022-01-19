@@ -82,6 +82,35 @@
                     </ul>
                 </div>
             </li>
+
+{{--            Progress Report--}}
+            <li class="cursor-pointer"
+                x-on:mouseover="$refs.reports.classList.remove('hidden'), $refs.reportLabel.classList.add('bg-blue-600')"
+                x-on:mouseover.away="$refs.reports.classList.add('hidden'), $refs.reportLabel.classList.remove('bg-blue-600')"
+            >
+                <a href="">
+                    <div class="text-white text-center mt-6 text-sm">
+                        <div class="p-1 rounded-l-full" x-ref="reportLabel">
+                            <x-icons.chart-solid class="h-5 w-5 mx-auto"/>
+                            <span>
+                                Report
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <div class="absolute left-24 bg-blue-600 w-40 shadow-lg hidden"
+                     style="top: 10.5rem"
+                     x-ref="reports"
+                >
+                    <ul class="text-sm text-white p-2">
+                        <li class="hover:font-bold">
+                            <a href="{{ route('student.reports.index') }}">Progress Report</a>
+
+
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </nav>
 </aside>

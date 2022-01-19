@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>CREATE SECTION</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto">
             <form action="{{ route('admin.sections.store', $strand->id) }}" method="POST" id="create-section">
                 @csrf
 
@@ -17,7 +17,7 @@
                         name="grade_id"
                         id="grade_id"
                         class="appearance-none bg-gray-50 w-full shadow p-2 rounded-md border border-gray-300 text-blue-900
-                                @error('name') border-red-500 bg-red-50 @enderror
+{{--                                @error('name') border-red-500 bg-red-50 @enderror--}}
                             "
                         form="create-section"
                     >
@@ -28,9 +28,9 @@
                         @endforelse
                     </select>
 
-                    @error('name')
-                    <p class="text-xs pt-1 text-red-500 font-medium">{{ $message }}</p>
-                    @enderror
+{{--                    @error('name')--}}
+{{--                    <p class="text-xs pt-1 text-red-500 font-medium">{{ $message }}</p>--}}
+{{--                    @enderror--}}
                 </section>
 
                 <x-forms.text-input

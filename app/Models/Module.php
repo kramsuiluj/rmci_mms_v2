@@ -29,4 +29,9 @@ class Module extends Model implements HasMedia
     {
         return $this->status === 0 ? "<p class='bg-blue-600 text-white py-1 px-3 rounded-full'>Submitted for Checking</p>" : "<p class='bg-green-600 text-white py-1 px-3 rounded-full'> Checked </p>";
     }
+
+    public function convertDateTime($dateTime)
+    {
+        return date("h:i A, F d, Y", strtotime($dateTime));
+    }
 }

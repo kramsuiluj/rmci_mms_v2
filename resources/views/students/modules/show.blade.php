@@ -6,7 +6,7 @@
         <div class="mb-10">
             <div class="text-blue-900 space-y-3">
                 <p class="text-sm font-extrabold">
-                    FILE NAME: <span class="font-medium text-base text-blue-600">{{ $module->getFirstMedia()->file_name }}</span>
+                    FILE NAME: <span class="font-medium text-base text-blue-600">{!! $module->getFirstMedia()->file_name ?? $module->module . "<span class='bg-gray-600 text-white py-0.5 px-2 rounded-full inline ml-2'> Offline </span>" !!}</span>
                 </p>
                 <p class="text-sm font-extrabold">
                     UPLOADED BY: <span class="font-medium text-base text-blue-600">{{ $module->user->fullname() }}</span>
@@ -58,7 +58,7 @@
                         cols="30"
                         rows="5"
                         style="resize: none"
-                        class="border border-gray-400"
+                        class="border border-gray-400 w-11/12"
                     >
                         {{ old('body') }}
                     </textarea>

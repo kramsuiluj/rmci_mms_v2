@@ -5,7 +5,7 @@
     <x-containers.main>
         <x-content-header>UPLOAD MODULE</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto">
             <form action="{{ route('teacher.modules.store', $schedule->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -30,7 +30,11 @@
                     >
 
                     @error('module')
-                    <p class="text-xs pt-1 text-red-500 font-medium">{{ $message }}</p>
+                        <p class="text-xs pt-1 text-red-500 font-medium">{{ $message }}</p>
+                    @enderror
+
+                    @error('filename')
+                        <p class="text-xs pt-1 text-red-500 font-medium">{{ $message }}</p>
                     @enderror
                 </section>
 

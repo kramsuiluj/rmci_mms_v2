@@ -14,7 +14,10 @@ class SendAnswer extends Notification
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $answer
+     * @param $student
+     * @param $assignment
+     * @param $schedule
      */
     public function __construct($answer, $student, $assignment, $schedule)
     {

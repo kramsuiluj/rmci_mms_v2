@@ -5,7 +5,7 @@
     <x-containers.main>
         <x-content-header>Generate Module</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto">
             <form action="{{ route('teacher.modules.download', [$schedule->id, $student->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 

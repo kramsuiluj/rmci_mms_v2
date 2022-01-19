@@ -63,7 +63,7 @@
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs font-primary font-medium text-blue-900">
-                                                        {{ $module->getFirstMedia()->created_at }}
+                                                        {{ $module->convertDateTime($module->getFirstMedia()->created_at) }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,14 +72,33 @@
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs font-primary font-medium text-blue-900 hover:text-blue-800">
-                                                        <div>
+                                                        <div class="space-y-1.5">
                                                             <a
                                                                 href="{{ route('teacher.modules.downloadModule', $module->id) }}"
-                                                                class="flex items-center space-x-1"
+                                                                class="flex items-center space-x-1 hover:text-blue-700"
                                                             >
                                                                 <x-icons.add-file class="h-5 w-5"/>
                                                                 <span>Download Module</span>
                                                             </a>
+
+                                                            <div x-data="{ open: false }">
+                                                                <form action="{{ route('teacher.modules.destroy', [$schedule->id, $module->id]) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="flex items-center space-x-1 text-red-500 hover:text-red-700 font-medium" type="button" @click="open = true">
+                                                                        <x-icons.document-remove class="h-5 w-5"/>
+                                                                        <span>Remove Module</span>
+                                                                    </button>
+
+                                                                    <div class="fixed bg-white border border-gray-300 shadow p-2 rounded-md -mt-14 left-20 sm:left-3/4" x-show="open">
+                                                                        <p>Are you sure you want to remove this module?</p>
+                                                                        <div class="p-2 flex justify-center space-x-2">
+                                                                            <button class="bg-blue-600 text-white font-medium rounded-full py-1.5 px-5">Confirm</button>
+                                                                            <button class="bg-gray-600 text-white font-medium rounded-full py-1.5 px-5" type="button" @click="open = false">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

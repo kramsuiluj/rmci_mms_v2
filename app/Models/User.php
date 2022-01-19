@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -81,5 +80,20 @@ class User extends Authenticatable
     public function fullname(): string
     {
         return $this->lastname . ', ' . $this->firstname . ' ' . substr($this->middlename, 0, 1) . '.';
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+           $query->where(function ($query) use ($search) {
+                $query->where('firstname', 'like', '%' . $search . '%')
+                    ->orWhere('middlename', 'like', '%' . $search . '%')
+                    ->orWhere('lastname', 'like', '%' . $search . '%')
+                    ->orWhere('id', 'like', '%' . $search . '%');
+           });
+           $query->orWhereHasMorph('profile', StudentProfile::class, function ($query) use ($search) {
+              $query->where('contact', 'like', '%' . $search . '%');
+           });
+        });
     }
 }

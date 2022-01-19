@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
+use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use App\Models\StudentProfile;
-use App\Models\TeacherProfile;
-use Illuminate\Http\Request;
 
 class TeacherRoomController extends Controller
 {
@@ -14,11 +13,11 @@ class TeacherRoomController extends Controller
         $room = auth()->user()->room;
 
         if (request('display') === 'students') {
-            $students = StudentProfile::latest()->filter(request(['display']))->get();
+            $students = StudentProfile::where('room_id', $room->id)->latest()->filter(request(['display']))->latest()->paginate(1)->withQueryString();
         }
 
         if (request('display') === 'subjects') {
-            $schedules = Schedule::where('room_id', $room->id)->latest()->filter(request(['display']))->get();
+            $schedules = Schedule::where('room_id', $room->id)->latest()->filter(request(['display']))->latest()->get();
         }
 
         return view('teachers.rooms.show', [

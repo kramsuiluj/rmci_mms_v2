@@ -75,10 +75,10 @@
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs font-primary font-medium text-blue-900 hover:text-blue-800">
-                                                        <div>
+                                                        <div class="">
                                                             <a
                                                                 href="{{ route('student.modules.download', [$schedule->id, $module->id]) }}"
-                                                                class="flex items-center space-x-1"
+                                                                class="flex items-center space-x-1 hover:text-blue-700"
                                                             >
                                                                 <x-icons.add-file class="h-5 w-5"/>
                                                                 <span>Download Module</span>

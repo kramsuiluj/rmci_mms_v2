@@ -8,6 +8,38 @@
             <span class="text-blue-600 font-semibold">STUDENT LIST</span>
         </x-content-header>
 
+        <div class="flex items-center mb-2">
+            <div class="flex border-2 rounded">
+                <form method="GET" class="flex items-center">
+                    <input
+                        type="text"
+                        name="search"
+                        class="px-4 py-2 w-4/5"
+                        placeholder="Search"
+                        value="{{ request('search') }}"
+                    >
+
+                    <input type="hidden" name="room" value="{{ $schedule->room->id }}">
+
+                    <button class="flex items-center justify-center px-4 border-l">
+                        <svg class="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24">
+                            <path
+                                d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                        </svg>
+                    </button>
+                    @if(request()->has(['search', 'room']))
+                        <a href="{{ route('teacher.students.indexBySchedule', $schedule->id) }}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    @endif
+                </form>
+
+            </div>
+        </div>
+
         @if ($schedule->room->students->count() === 0)
             <div>
                 <p class="text-gray-500 flex items-center space-x-3">
@@ -47,7 +79,7 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
 
-                                @foreach ($schedule->room->students as $student)
+                                @foreach ($students as $student)
 
                                     <tr x-data="{ show: false }">
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -81,7 +113,7 @@
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs font-primary font-medium text-blue-900">
-                                                        {{ $student->user->username }}
+                                                        {{ $student->user->id }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,5 +153,6 @@
                 </div>
             </div>
         @endif
+        {{ $students->links() }}
     </x-containers.main>
 </x-layout>

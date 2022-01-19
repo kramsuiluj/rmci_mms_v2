@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
+use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use App\Models\Room;
 use App\Models\Strand;
@@ -97,7 +98,28 @@ class AdminRoomController extends Controller
 
     public function destroy(Room $room)
     {
+        $students = $room->students;
+
+        foreach($students as $student) {
+            if ($student->notifications()) {
+                $student->notifications()->delete();
+            }
+
+            if ($student->user->modules) {
+                foreach($student->user->modules as $module) {
+                    if ($module->getFirstMedia()) {
+                        $module->getFirstMedia()->delete();
+                        $module->delete();
+                    } else {
+                        $module->delete();
+                    }
+                }
+            }
+            $student->user->delete();
+        }
+
         User::find($room->adviser_id)->profile->update(['is_adviser' => false]);
+
         $room->delete();
 
         return redirect(route('admin.rooms.index'))

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
+use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Assignment;
 use App\Models\Schedule;

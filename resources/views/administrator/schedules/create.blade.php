@@ -4,9 +4,9 @@
     @include('_admin-nav')
 
     <x-containers.main>
-        <x-content-header>CREATE STRAND</x-content-header>
+        <x-content-header>ADD SCHEDULE</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto space-x-5">
             <form action="{{ route('admin.schedules.store', $room->id) }}" method="POST">
                 @csrf
 

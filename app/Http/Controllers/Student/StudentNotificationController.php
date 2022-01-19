@@ -1,14 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
-use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
 
 class StudentNotificationController extends Controller
 {
     public function index()
     {
-//        dd(\App\Models\Module::firstWhere('id', 27)->id);
+//        $unreadNotifications = auth()->user()->profile->unreadNotifications;
+//
+//        $notifications = $unreadNotifications->map(function ($notification) {
+//            $notification->schedule;
+//            return $notification;
+//        });
+//
+//        dd($notifications);
 
         return view('students.notifications.index', [
             'notifications' => auth()->user()->profile->unreadNotifications

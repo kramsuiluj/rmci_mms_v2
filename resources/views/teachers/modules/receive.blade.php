@@ -6,7 +6,7 @@
         <x-content-header>RECEIVE MODULE</x-content-header>
 
         <div class="w-1/2 mx-auto space-x-5">
-            <form action="{{ route('teacher.modules.record', [$schedule->id, $student->id]) }}" method="POST">
+            <form action="{{ route('teacher.modules.record', [$schedule->id, $student->id]) }}" method="POST" id="record-form">
                 @csrf
 
                 <input type="hidden" name="user_id" value="{{ $student->id }}">
@@ -20,9 +20,11 @@
                 >
                 </x-forms.text-input>
 
-                @foreach($errors->all() as $message)
-                    <p class="text-xs text-red-500 font-medium -mt-4">{{ $message }}</p>
-                @endforeach
+                <x-forms.text-input name="module" label="Module Name" type="text" form="record-form"/>
+
+{{--                @foreach($errors->all() as $message)--}}
+{{--                    <p class="text-xs text-red-500 font-medium -mt-4">{{ $message }}</p>--}}
+{{--                @endforeach--}}
 
 
 

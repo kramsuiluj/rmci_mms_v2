@@ -10,7 +10,7 @@
             @csrf
             @method('PATCH')
 
-            <div class="w-4/5 mx-auto sm:flex space-x-5">
+            <div class="w-4/5 mx-auto sm:flex sm:space-x-5">
 
                 <input type="hidden" name="strand_id" value="{{ isset($currentStrand) ? $currentStrand->id : $currentRoom->strand->id }}" form="create-room">
                 <input type="hidden" name="grade_id" value="{{ isset($currentGrade) ? $currentGrade->id : $currentRoom->grade->id }}" form="create-room">

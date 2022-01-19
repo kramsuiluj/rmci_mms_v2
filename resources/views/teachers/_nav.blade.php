@@ -1,5 +1,5 @@
 <aside
-    class="absolute fixed h-full bg-blue-900 top-0 w-48 sm:border-t-8 sm:border-blue-900 sm:mt-24 sm:ml-24 sm:bg-blue-600 sm:z-50 sm:fixed shadow-md hidden"
+    class="fixed h-full bg-blue-900 top-0 w-48 sm:border-t-8 sm:border-blue-900 sm:mt-24 sm:ml-24 sm:bg-blue-600 sm:z-50 sm:fixed shadow-md hidden"
     id="second-nav"
 >
     <div class="flex justify-end cursor-pointer border-b-2 border-white py-3 sm:hidden" id="close-menu" onclick="closeMenu()">
@@ -19,20 +19,24 @@
                 </a>
             </div>
 
-            <div class="mt-5">
-                <h3 class="text-sm text-white font-semibold">Manage Classes</h3>
+            @if(auth()->user()->room)
+                <div class="mt-5">
+                    <h3 class="text-sm text-white font-semibold">Manage Classes</h3>
 
-                <div class="pl-2 mt-2">
-                    <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                            </svg>
-                        </div>
-                        <a href="{{ route('teacher.rooms.show', auth()->user()->room->id) }}" class="text-sm">My Advisory Class</a>
-                    </li>
+                    <div class="pl-2 mt-2">
+                        <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                </svg>
+                            </div>
+                            @if(auth()->user()->profile->is_adviser === 1)
+                                <a href="{{ route('teacher.rooms.show', auth()->user()->room->id) }}" class="text-sm">My Advisory Class</a>
+                            @endif
+                        </li>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="mt-5">
                 <h3 class="text-sm text-white font-semibold">Manage Subjects</h3>
@@ -49,29 +53,31 @@
                 </div>
             </div>
 
-            <div class="mt-5">
-                <h3 class="text-sm text-white font-semibold">Manage Students</h3>
+            @if(auth()->user()->room)
+                <div class="mt-5">
+                    <h3 class="text-sm text-white font-semibold">Manage Students</h3>
 
-                <div class="pl-2 mt-2">
-                    <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                            </svg>
-                        </div>
-                        <a href="{{ route('admin.teachers.index') }}" class="text-sm">Enroll Student by File Upload</a>
-                    </li>
+                    <div class="pl-2 mt-2">
+                        <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                </svg>
+                            </div>
+                            <a href="{{ auth()->user()->profile->is_adviser == true ? route('teacher.students.createByFile', auth()->user()->room->id) : '' }}" class="text-sm">Enroll Student by File Upload</a>
+                        </li>
 
-                    <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline mt-1">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        <a href="{{ route('admin.teachers.create') }}" class="text-sm">Enroll Student by Form</a>
-                    </li>
+                        <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline mt-1">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <a href="{{ route('teacher.students.createByForm', auth()->user()->room->id) }}" class="text-sm">Enroll Student by Form</a>
+                        </li>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="mt-5">
                 <h3 class="text-sm text-white font-semibold">Manage Modules</h3>
@@ -149,7 +155,9 @@
                         </span>
                     </div>
                 </a>
-                <div class="absolute left-24 bg-blue-600 w-48 hidden {{ auth()->user()->profile->is_adviser == false ? 'top-20' : 'top-40' }}"
+
+                <div class="absolute left-24 bg-blue-600 w-48 hidden"
+                     style="top: {{ auth()->user()->profile->is_adviser == false ? '5.6rem' : '10rem' }}"
                      x-ref="subjects"
                 >
                     <ul class="text-sm text-white p-2">
@@ -204,7 +212,8 @@
                         </span>
                     </div>
                 </a>
-                <div class="absolute left-24 bg-blue-600 w-40 hidden {{ auth()->user()->profile->is_adviser == false ? 'top-36' : 'top-72' }}"
+                <div class="absolute left-24 bg-blue-600 w-40 hidden"
+                     style="top: {{ auth()->user()->profile->is_adviser == false ? '9.5rem' : '18rem' }}"
                      x-ref="strands"
                 >
                     <ul class="text-sm text-white p-2">

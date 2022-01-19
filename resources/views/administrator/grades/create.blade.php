@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>SET GRADE TO STRAND</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto space-x-5">
             <form action="{{ route('admin.grades.store', $strand->id) }}" method="POST" id="create-grade">
                 @csrf
 
@@ -20,12 +20,12 @@
                 </section>
 
                 <section class="pb-5">
-                    <label for="name" class="text-sm text-blue-900 font-medium block pb-5">Select Grades</label>
+                    <label for="name" class="text-sm text-blue-900 font-medium block pb-5">Select Grade</label>
 
                     <select
                         name="name"
                         id="name"
-                        class="appearance-none bg-gray-50 w-full shadow p-2 rounded-md border border-gray-300 text-blue-900
+                        class="bg-gray-50 w-full shadow p-2 rounded-md border border-gray-300 text-blue-900
                                 @error('name') border-red-500 bg-red-50 @enderror
                         "
                         form="create-grade"

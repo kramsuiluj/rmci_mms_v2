@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>ENROLL STUDENT</x-content-header>
 
-        <div class="w-4/5 mx-auto sm:flex space-x-5">
+        <div class="w-4/5 mx-auto sm:flex sm:space-x-5">
             <form action="{{ route('teacher.students.storeByForm', $room->id) }}" method="POST" id="enroll-student">
                 @csrf
             </form>

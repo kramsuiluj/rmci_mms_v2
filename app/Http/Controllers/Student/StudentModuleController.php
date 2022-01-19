@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Module;
 use App\Models\Schedule;
 use App\Notifications\SubmitModule;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -88,13 +91,31 @@ class StudentModuleController extends Controller
             ]
         ]);
 
-        $module = Module::create($attributes);
+        $attributes['filename'] = request('module')->getClientOriginalName();
+
+        try {
+            $module = Module::create($attributes);
+        } catch (QueryException $e) {
+            throw ValidationException::withMessages([
+                'filename' => 'You have already submitted a module with similar filename.'
+            ]);
+        }
+
         $module->addMedia($attributes['module'])->toMediaCollection();
 
         $schedule->teacher->notify(new SubmitModule($module));
 
         return redirect(route('student.modules.submitted', $schedule->id))
             ->with('success', 'You have successfully uploaded a module for ' . $schedule->subject->name);
+    }
+
+    public function destroy(Schedule $schedule, Module $module)
+    {
+        $module->getFirstMedia()->delete();
+        $module->delete();
+
+        return redirect(route('student.modules.submitted', $schedule->id))
+            ->with('success', 'You have successfully removed the module you selected!');
     }
 
     protected function generateQrCode($schedule, $student): string

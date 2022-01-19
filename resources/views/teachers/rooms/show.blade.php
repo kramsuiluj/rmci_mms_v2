@@ -25,7 +25,7 @@
                 </div>
 
                 <div
-                    class="absolute bg-gray-50 border border-gray-300 mt-1 rounded-md w-full sm:w-80"
+                    class=" bg-gray-50 border border-gray-300 mt-1 rounded-md w-full sm:w-80"
                      x-show="open"
                     @click.away="open = false"
                 >
@@ -163,6 +163,9 @@
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mt-5">
+                            {{ $students->links() }}
                         </div>
                     </div>
                 @endif

@@ -14,22 +14,26 @@ class SessionController extends Controller
             'password' => ['required', 'min:4']
         ]);
 
-        if (is_numeric(request('username'))) {
+        if (is_numeric($credentials['username'])) {
             if (auth()->attempt(['id' => $credentials['username'], 'password' => $credentials['password']])) {
                 session()->regenerate();
 
-                return redirect()->intended('/student');
+                if (auth()->user()->profile->is_active == true) {
+                    return redirect()->intended(route('student.index'));
+                } else {
+                    return redirect()->intended(route('student.edit', auth()->user()->id));
+                }
             }
         } else {
             if (auth()->attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
                 session()->regenerate();
 
                 if (auth()->user()->username === 'admin') {
-                    return redirect()->intended('/admin');
+                    return redirect()->intended(route('admin.home'));
                 }
 
                 if (auth()->user()->profile_type === 'App\Models\TeacherProfile') {
-                    return redirect()->intended('/teacher');
+                    return redirect()->intended(route('teacher.index'));
                 }
             }
         }

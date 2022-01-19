@@ -52,7 +52,7 @@
                                                 <div class="flex items-center">
                                                     <div class="ml-4">
                                                         <div class="text-xs font-medium font-primary text-blue-900">
-                                                            <p class="{{ empty($latestModule->getFirstMedia()->file_name) ? 'bg-gray-600 text-white py-1 px-3 rounded-full' : '' }}">{{ $latestModule->getFirstMedia()->file_name ?? 'File Submitted Offline' }}</p>
+                                                            <p class="{{ empty($latestModule->getFirstMedia()->file_name) ? 'bg-gray-600 text-white py-1 px-3 rounded-full' : '' }}">{{ $latestModule->getFirstMedia()->file_name ?? $latestModule->module }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,7 +187,7 @@
                     </div>
                 @endif
             @else
-                <div class="mt-5 w-1/3">
+                <div class="mt-5 sm:w-1/3">
                     <div class="border border-gray-400 p-2 rounded-lg">
                         <x-icons.warning class="w-6 h-6 mx-auto text-gray-600"/>
                         <p class="text-gray-600 text-center">
@@ -268,7 +268,7 @@
                                                     <div class="flex items-center">
                                                         <div class="ml-4">
                                                             <div class="text-xs font-primary font-medium text-blue-900">
-                                                                <p class="text-sm font-medium text-white py-1 px-5 rounded-full {{ $latestAnswer->status === 0 ? 'bg-blue-600' : 'bg-green-600' }}">
+                                                                <p class="font-medium text-white py-1 px-5 rounded-full {{ $latestAnswer->status === 0 ? 'bg-blue-600' : 'bg-green-600' }}">
                                                                     {{ $latestAnswer->status === 0 ? 'Submitted for Grading' : 'Graded' }}
                                                                 </p>
                                                             </div>
@@ -318,7 +318,7 @@
                     </div>
                 @endif
             @else
-                <div class="mt-5 w-1/3 pb-1">
+                <div class="mt-5 sm:w-1/3 pb-1">
                     <div class="border border-gray-400 p-2 rounded-lg">
                         <x-icons.warning class="w-6 h-6 mx-auto text-gray-600"/>
                         <p class="text-gray-600 text-center">
@@ -329,10 +329,10 @@
             @endif
         </div>
 
-        <div class="mt-20 border-b border-gray-400 pb-5">
+        <div class="mt-5 border-b border-gray-400 pb-5">
             <h3 class="text-blue-900 font-semibold text-center mb-3">Total Number of Module Submitted per Subject</h3>
 
-            <div class="w-1/3 mx-auto">
+            <div class="sm:w-1/3 mx-auto">
                 @if($schedules->count() === 0 || $modules->count() === 0)
                     <div class="border border-gray-400 p-2 rounded-lg">
                         <x-icons.warning class="w-6 h-6 mx-auto text-gray-600"/>
@@ -350,7 +350,7 @@
             <x-content-header class="">Teacher Panel</x-content-header>
 
             <div class="flex-col space-y-5">
-                <div class="flex space-x-5 flex-1">
+                <div class="sm:flex sm:space-x-5 flex-1 space-y-3 sm:space-y-0">
                     <div class="border border-gray-300 flex-1">
                         <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
                             MODULE MONITORING
@@ -364,18 +364,20 @@
                         </a>
                     </div>
 
-                    <div class="border border-gray-300 flex-1">
-                        <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
-                            CLASS ACTIONS
-                        </p>
+                    @if (auth()->user()->room)
+                        <div class="border border-gray-300 flex-1">
+                            <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
+                                CLASS ACTIONS
+                            </p>
 
-                        <a href="{{ route('teacher.rooms.show', auth()->user()->room->id) }}" class="hover:bg-blue-100">
-                            <div class="p-5 hover:bg-blue-100 text-blue-900">
-                                <p class="text-center">My Advisory Class</p>
-                                <x-icons.building class="h-6 w-6 mx-auto" />
-                            </div>
-                        </a>
-                    </div>
+                            <a href="{{ route('teacher.rooms.show', auth()->user()->room->id) }}" class="hover:bg-blue-100">
+                                <div class="p-5 hover:bg-blue-100 text-blue-900">
+                                    <p class="text-center">My Advisory Class</p>
+                                    <x-icons.building class="h-6 w-6 mx-auto" />
+                                </div>
+                            </a>
+                        </div>
+                    @endif
 
                     <div class="border border-gray-300 flex-1">
                         <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
@@ -391,42 +393,50 @@
                     </div>
                 </div>
 
-                <div class="flex space-x-5">
-                    <div class="border border-gray-300 flex-1">
-                        <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
-                            STUDENT ACTIONS
-                        </p>
+                    <div class="sm:flex sm:space-x-5 space-y-3 sm:space-y-0">
+                        @if(auth()->user()->room)
+                        <div class="border border-gray-300 flex-1">
+                            <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
+                                STUDENT ACTIONS
+                            </p>
 
-                        <div class="flex">
-                            <a href="{{ route('teacher.students.createByFile', auth()->user()->room->id) }}" class="hover:bg-blue-100 flex-1 border-r">
-                                <div class="p-5 hover:bg-blue-100 text-blue-900">
-                                    <p class="text-center">Enroll Student by File Upload</p>
-                                    <x-icons.upload class="h-6 w-6 mx-auto" />
-                                </div>
-                            </a>
+                            <div class="sm:flex">
+                                <a
+                                    href="{{ route('teacher.students.createByFile', auth()->user()->room->id) }}"
+                                   class="hover:bg-blue-100 flex-1 border-r"
+                                >
+                                    <div class="p-5 hover:bg-blue-100 text-blue-900 border-b">
+                                        <p class="text-center">Enroll Student by File Upload</p>
+                                        <x-icons.upload class="h-6 w-6 mx-auto" />
+                                    </div>
+                                </a>
 
-                            <a href="{{ route('teacher.students.createByForm', auth()->user()->room->id) }}" class="hover:bg-blue-100 flex-1">
+                                <a
+                                    href="{{ route('teacher.students.createByForm', auth()->user()->room->id) }}"
+                                    class="hover:bg-blue-100 flex-1"
+                                >
+                                    <div class="px-5 pb-5 sm:pt-5 hover:bg-blue-100 text-blue-900">
+                                        <p class="text-center">Enroll Student by Form</p>
+                                        <x-icons.pen class="h-6 w-6 mx-auto" />
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        @endif
+
+                        <div class="border border-gray-300 flex-1">
+                            <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
+                                MODULE ACTIONS
+                            </p>
+
+                            <a href="{{ route('teacher.modules.scan') }}" class="hover:bg-blue-100">
                                 <div class="p-5 hover:bg-blue-100 text-blue-900">
-                                    <p class="text-center">Enroll Student by Form</p>
-                                    <x-icons.pen class="h-6 w-6 mx-auto" />
+                                    <p class="text-center">Receive Module via QRCODE</p>
+                                    <x-icons.qrcode class="h-6 w-6 mx-auto" />
                                 </div>
                             </a>
                         </div>
                     </div>
-
-                    <div class="border border-gray-300 flex-1">
-                        <p class="bg-blue-600 py-1 px-2 text-white font-semibold border-l-8 border-blue-900">
-                            MODULE ACTIONS
-                        </p>
-
-                        <a href="{{ route('teacher.modules.scan') }}" class="hover:bg-blue-100">
-                            <div class="p-5 hover:bg-blue-100 text-blue-900">
-                                <p class="text-center">Receive Module via QRCODE</p>
-                                <x-icons.qrcode class="h-6 w-6 mx-auto" />
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -444,7 +454,7 @@
                     {
                         labels: [],
                         data: [],
-                        backgroundColor: ['#1E3A8A', '#2563EB', '#25bdeb', '#60a1e0']
+                        backgroundColor: ['#1E3A8A', '#2563EB', '#25bdeb', '#60a1e0', '#60a1e0']
                     }
                 ]
             },

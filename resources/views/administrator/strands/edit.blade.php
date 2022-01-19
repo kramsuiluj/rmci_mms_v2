@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>EDIT STRAND</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto">
             <form action="{{ route('admin.strands.update', $strand->id) }}" method="POST" id="update-strand">
                 @csrf
                 @method('PATCH')

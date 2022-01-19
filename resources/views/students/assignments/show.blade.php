@@ -3,11 +3,11 @@
     @include('students._nav')
 
     <x-containers.main>
-        <div class="w-4/5 mx-auto">
+        <div class="sm:w-4/5 mx-auto">
 
             <x-back/>
 
-            <div class="w-4/5 mx-auto mt-5">
+            <div class="sm:w-4/5 mx-auto mt-5">
                 <div>
                     <x-content-header>{{ $assignment->title }}</x-content-header>
 

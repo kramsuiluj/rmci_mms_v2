@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Assignment;
 use App\Models\Schedule;
 use App\Notifications\AnswerUpdated;
 use App\Notifications\SendAnswer;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class StudentAnswerController extends Controller
 {

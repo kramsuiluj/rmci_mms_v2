@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
+use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use App\Models\Subject;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\Room;
 use Illuminate\Validation\Rule;
 
@@ -60,7 +60,7 @@ class AdminScheduleController extends Controller
             $update['teacher_id'] = $attributes['teacher_id'];
         }
 
-        if (! empty($update)) {
+        if (!empty($update)) {
             $schedule->update($update);
 
             return redirect(route('admin.schedules.index', $room->id))
@@ -69,6 +69,13 @@ class AdminScheduleController extends Controller
             return redirect(route('admin.schedules.index', $room->id))
                 ->with('info', 'You did not update any field.');
         }
+    }
+
+    public function destroy(Room $room, Schedule $schedule)
+    {
+        $schedule->delete();
+
+        return back()->with('success', 'You have successfully deleted the schedule you selected!');
     }
 
     protected function validateSchedule($schedule = ''): array

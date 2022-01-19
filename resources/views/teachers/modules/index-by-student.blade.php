@@ -51,7 +51,7 @@
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs font-medium font-primary text-blue-900">
-                                                        <p class="{{ empty($module->getFirstMedia()->file_name) ? 'bg-gray-600 text-white py-1 px-3 rounded-full' : '' }}">{{ $module->getFirstMedia()->file_name ?? 'File Submitted Offline' }}</p>
+                                                        <p>{!! $module->getFirstMedia()->file_name ?? $module->module . "<span class='bg-gray-600 text-white py-0.5 px-2 rounded-full inline ml-2'> Offline </span>" !!}</p>
                                                     </div>
                                                 </div>
                                             </div>

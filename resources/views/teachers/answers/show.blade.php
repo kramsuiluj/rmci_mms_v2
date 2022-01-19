@@ -3,7 +3,7 @@
     @include('teachers._nav')
 
     <x-containers.main>
-        <div class="w-4/5 mx-auto">
+        <div class="sm:w-4/5 mx-auto">
 
             <x-back/>
 

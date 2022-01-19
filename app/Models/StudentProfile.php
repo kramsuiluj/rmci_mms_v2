@@ -26,9 +26,23 @@ class StudentProfile extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        if ($filters['display'] == 'students') {
-            $query->when($filters['display'] ?? false, function ($query) {
-                $query->where('room_id', 'like', '%' . auth()->user()->room->id . '%');
+        if(!empty($filters) && array_key_exists('display', $filters)) {
+            $query->when($filters['display'] == 'students' ?? false, function ($query) {
+                $query->when($filters['display'] ?? false, function ($query) {
+                    $query->where('room_id', 'like', '%' . auth()->user()->room->id . '%');
+                });
+            });
+        }
+
+        if (!empty($filters && array_key_exists('search', $filters) && array_key_exists('room', $filters))) {
+            $query->when($filters['search'] && $filters['room'] ?? false, function ($query) {
+                $query->where('room_id', request('room'));
+                $query->whereHas('user', function ($query) {
+                    $query->where('firstname', 'like', '%' . request('search') . '%')
+                        ->orWhere('middlename', 'like', '%' . request('search') . '%')
+                        ->orWhere('lastname', 'like', '%' . request('search') . '%')
+                        ->orWhere('id', 'like', '%' . request('search') . '%');
+                });
             });
         }
     }

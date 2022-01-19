@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>EDIT SCHEDULE</x-content-header>
 
-        <div class="w-1/2 mx-auto space-x-5">
+        <div class="sm:w-1/2 w-4/5 mx-auto space-x-5">
             <form action="{{ route('admin.schedules.update', [$room->id, $schedule->id]) }}" method="POST">
                 @csrf
                 @method('PATCH')

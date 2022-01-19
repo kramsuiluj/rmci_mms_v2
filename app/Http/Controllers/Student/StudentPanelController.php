@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use App\Models\Assignment;
 use App\Models\Module;
-use Illuminate\Http\Request;
 
 class StudentPanelController extends Controller
 {

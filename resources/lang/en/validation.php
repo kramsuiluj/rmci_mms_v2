@@ -145,7 +145,8 @@ return [
             'rule-name' => 'custom-message',
         ],
         'firstname' => [
-            'alpha_spaces' => 'The first name must only contain letters and spaces.'
+            'alpha_spaces' => 'The first name must only contain letters and spaces.',
+            'unique' => 'The combination of first name, middle name and last name must be unique.'
         ],
         'middlename' => [
             'alpha_spaces' => 'The middle name must only contain letters and spaces.'
@@ -180,7 +181,16 @@ return [
             'required' => 'The content field is required.'
         ],
         'adviser_id' => [
-            'required' => 'The adviser field is required.'
+            'required' => 'You did not select an adviser.'
+        ],
+        'module' => [
+            'unique' => 'A module with the name you entered already exist.'
+        ],
+        'subject_id' => [
+            'unique' => 'The subject you selected has already been taken.'
+        ],
+        'teacher_id' => [
+            'unique' => 'The teacher you selected has been already set to the subject you selected above.'
         ]
     ],
 

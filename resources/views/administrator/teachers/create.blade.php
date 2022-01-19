@@ -6,7 +6,7 @@
     <x-containers.main>
         <x-content-header>CREATE TEACHER ACCOUNT</x-content-header>
 
-        <div class="w-4/5 mx-auto sm:flex space-x-5">
+        <div class="w-4/5 mx-auto sm:flex sm:space-x-5">
             <form action="{{ route('admin.teachers.store') }}" method="POST" id="update-teacher">
                 @csrf
             </form>
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <section class="sm:w-72 sm:ml-36 w-64 ml-16">
+        <section class="sm:w-72 sm:ml-36 w-64 mx-auto mb-10">
             <button type="submit" form="update-teacher" class="bg-blue-900 w-full py-2 rounded-full text-white font-bold hover:bg-blue-600">CREATE ACCOUNT</button>
         </section>
     </x-containers.main>

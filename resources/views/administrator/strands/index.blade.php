@@ -133,7 +133,7 @@
                                             </div>
                                         </td>
                                         <td
-                                            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium absolute bg-gray-50 right-28 mt-3 rounded-md border-2 border-gray-200 shadow w-62"
+                                            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium absolute bg-gray-50 right-28 mt-3 rounded-md border-2 border-gray-200 shadow w-62 -mr-16 sm:mr-0"
                                             x-show="show"
                                             style="display: none"
                                         >

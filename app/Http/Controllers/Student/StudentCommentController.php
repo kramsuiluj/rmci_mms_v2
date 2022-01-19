@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Module;
 use App\Models\Schedule;
-use App\Notifications\TeacherCommented;
+use App\Notifications\StudentCommented;
 use Illuminate\Http\Request;
 
-class TeacherCommentController extends Controller
+class StudentCommentController extends Controller
 {
     public function store(Schedule $schedule, Module $module)
     {
@@ -22,7 +23,7 @@ class TeacherCommentController extends Controller
             'body' => $attribute['body']
         ]);
 
-        $module->user->profile->notify(new TeacherCommented($comment, $schedule, $module));
+        $schedule->teacher->notify(new StudentCommented($comment, $schedule));
 
         return back();
     }

@@ -1,5 +1,5 @@
 <aside
-    class="absolute fixed h-full bg-blue-900 top-0 w-48 sm:border-t-8 sm:border-blue-900 sm:mt-24 sm:ml-24 sm:bg-blue-600 sm:z-50 sm:fixed hidden shadow-md"
+    class="fixed h-full bg-blue-900 top-0 w-48 sm:border-t-8 sm:border-blue-900 sm:mt-24 sm:ml-24 sm:bg-blue-600 sm:z-50 sm:fixed hidden shadow-md"
     id="second-nav"
 >
     <div class="flex justify-end cursor-pointer border-b-2 border-white py-3 sm:hidden" id="close-menu" onclick="closeMenu()">
@@ -87,6 +87,21 @@
                             </svg>
                         </div>
                         <a href="{{ route('admin.teachers.create') }}" class="text-sm">Create Teacher Account</a>
+                    </li>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3 class="text-sm text-white font-semibold">Manage Students</h3>
+
+                <div class="pl-2 mt-2">
+                    <li class="flex items-center space-x-1 text-white hover:font-bold hover:underline">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                        </div>
+                        <a href="{{ route('admin.students.index') }}" class="text-sm">View All Students</a>
                     </li>
                 </div>
             </div>
@@ -217,6 +232,30 @@
                     </ul>
                 </div>
             </li>
+
+            <li class="cursor-pointer"
+                x-on:mouseover="$refs.students.classList.remove('hidden'), $refs.studentLabel.classList.add('bg-blue-600')"
+                x-on:mouseover.away="$refs.students.classList.add('hidden'), $refs.studentLabel.classList.remove('bg-blue-600')"
+            >
+                <a href="">
+                    <div class="text-white text-center mt-6 text-sm rounded-l-full" x-ref="studentLabel">
+                        <x-icons.academic-cap class="h-5 w-5 mx-auto"/>
+                        <span>
+                            Students
+                        </span>
+                    </div>
+                </a>
+                <div class="absolute left-24 bg-blue-600 w-40 hidden"
+                     style="top: 18rem"
+                     x-ref="students"
+                >
+                    <ul class="text-sm text-white p-2">
+                        <li class="hover:font-bold">
+                            <a href="{{ route('admin.students.index') }}">View All Students</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
             <li
                 class="cursor-pointer"
                 x-on:mouseover="$refs.strands.classList.remove('hidden'), $refs.strandLabel.classList.add('bg-blue-600')"
@@ -232,7 +271,8 @@
                         </span>
                     </div>
                 </a>
-                <div class="absolute left-24 bg-blue-600 top-72 w-40 hidden"
+                <div class="absolute left-24 bg-blue-600 w-40 hidden"
+                     style="top: 22rem"
                      x-ref="strands"
                 >
                     <ul class="text-sm text-white p-2">
